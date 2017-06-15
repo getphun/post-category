@@ -20,8 +20,6 @@ CREATE TABLE IF NOT EXISTS `post_category_chain` (
     `user` INTEGER NOT NULL,
     `post` INTEGER NOT NULL,
     `post_category` INTEGER NOT NULL,
-    
-    `post_status` TINYINT DEFAULT 1,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
