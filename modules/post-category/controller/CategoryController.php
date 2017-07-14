@@ -10,6 +10,7 @@ namespace PostCategory\Controller;
 use PostCategory\Meta\Category;
 use PostCategory\Model\PostCategory as PCategory;
 use PostCategory\Model\PostCategoryChain as PTChain;
+use Post\Model\Post;
 
 class CategoryController extends \SiteController
 {
@@ -60,16 +61,21 @@ class CategoryController extends \SiteController
         if($page > 1 || is_dev())
             $cache = null;
         
-        $category = \Formatter::format('post-category', $category, false, ['user']);
+        $category = \Formatter::format('post-category', $category, ['user']);
         $params = [
             'category' => $category,
             'posts' => [],
             'pagination' => [],
-            'total' => 0
+            'total' => Post::countX(['category'=>$category->id, 'status'=>4])
         ];
         
-        // TODO
-        // get the post and pagination
+        // pagination
+        if($params['total'] > $rpp)
+            $params['pagination'] = calculate_pagination($page, $rpp, $params['total']);
+        
+        $posts = Post::getX(['category'=>$category->id, 'status'=>4], $rpp, $page, 'created DESC');
+        if($posts)
+            $params['posts'] = \Formatter::formatMany('post', $posts, false, false);
         
         $params['category']->meta = Category::single($category);
         
