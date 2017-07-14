@@ -91,6 +91,18 @@ return [
             ],
             'meta_title' => 'text',
             'meta_description' => 'text'
+        ],
+        'post' => [
+            'category' => [
+                'type' => 'chain',
+                'model' => 'PostCategory\\Model\\PostCategory',
+                'chain' => [
+                    'model' => 'PostCategory\\Model\\PostCategoryChain',
+                    'object' => 'post',
+                    'parent' => 'post_category'
+                ],
+                'format' => 'post-category'
+            ]
         ]
     ],
     'robot' => [
