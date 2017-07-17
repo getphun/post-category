@@ -101,6 +101,10 @@ class Category
             ]
         ];
         
+        // my rss feed?
+        if(module_exists('robot'))
+            $single->_metas['feed'] = $dis->router->to('sitePostCategorySingleFeedXML', ['slug'=>$category->slug]);
+        
         // schemas 
         $schema = [
             '@context'      => 'http://schema.org',

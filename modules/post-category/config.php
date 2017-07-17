@@ -52,13 +52,22 @@ return [
                 'rule' => '/post/category/feed.json',
                 'handler' => 'PostCategory\\Controller\\Robot::feedJson'
             ],
-            'sitePostCategorySingle' => [
-                'rule' => '/post/category/:slug',
-                'handler' => 'PostCategory\\Controller\\Category::single'
-            ],
             'sitePostCategory' => [
                 'rule' => '/post/category',
                 'handler' => 'PostCategory\\Controller\\Category::index'
+            ],
+            
+            'sitePostCategorySingleFeedXML' => [
+                'rule' => '/post/category/:slug/feed.xml',
+                'handler' => 'PostCategory\\Controller\\Robot::feedSingleXml'
+            ],
+            'sitePostCategorySingleFeedJSON' => [
+                'rule' => '/post/category/:slug/feed.json',
+                'handler' => 'PostCategory\\Controller\\Robot::feedSingleJson'
+            ],
+            'sitePostCategorySingle' => [
+                'rule' => '/post/category/:slug',
+                'handler' => 'PostCategory\\Controller\\Category::single'
             ]
         ]
     ],
