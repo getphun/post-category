@@ -1,6 +1,6 @@
 <?php
 /**
- * Post tag events
+ * Post category events
  * @package post-category
  * @version 0.0.1
  * @upgrade false
