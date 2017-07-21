@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS `post_category` (
     `parent` INTEGER DEFAULT 0,
     `about` TEXT,
     
+    `canal` INTEGER DEFAULT 0,
+    
     `meta_title` VARCHAR(100),
     `meta_description` TEXT,
     `meta_keywords` VARCHAR(200),

@@ -61,7 +61,8 @@ class CategoryController extends \SiteController
         if($page > 1 || is_dev())
             $cache = null;
         
-        $category = \Formatter::format('post-category', $category, ['user']);
+        $category = \Formatter::format('post-category', $category, ['user', 'canal']);
+        
         $params = [
             'category' => $category,
             'posts' => [],
