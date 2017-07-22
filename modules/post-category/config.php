@@ -92,10 +92,6 @@ return [
                 'type' => 'object',
                 'model' => 'User\\Model\\User'
             ],
-            'canal' => [
-                'type' => 'object',
-                'model' => 'PostCanal\\Model\\PostCanal'
-            ],
             'page' => [
                 'type' => 'router',
                 'params' => [
