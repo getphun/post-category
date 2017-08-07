@@ -44,28 +44,21 @@ return [
     ],
     '_routes' => [
         'site' => [
-            'sitePostCategoryFeedXML' => [
+            'sitePostCategoryFeed' => [
                 'rule' => '/post/category/feed.xml',
-                'handler' => 'PostCategory\\Controller\\Robot::feedXml'
-            ],
-            'sitePostCategoryFeedJSON' => [
-                'rule' => '/post/category/feed.json',
-                'handler' => 'PostCategory\\Controller\\Robot::feedJson'
+                'handler' => 'PostCategory\\Controller\\Robot::feed'
             ],
             'sitePostCategory' => [
                 'rule' => '/post/category',
                 'handler' => 'PostCategory\\Controller\\Category::index'
             ],
             
-            'sitePostCategorySingleFeedXML' => [
+            'sitePostCategorySingleFeed' => [
                 'rule' => '/post/category/:slug/feed.xml',
-                'handler' => 'PostCategory\\Controller\\Robot::feedSingleXml'
-            ],
-            'sitePostCategorySingleFeedJSON' => [
-                'rule' => '/post/category/:slug/feed.json',
-                'handler' => 'PostCategory\\Controller\\Robot::feedSingleJson'
+                'handler' => 'PostCategory\\Controller\\Robot::feedSingle'
             ],
             'sitePostCategorySingle' => [
+                'priority' => 0,
                 'rule' => '/post/category/:slug',
                 'handler' => 'PostCategory\\Controller\\Category::single'
             ]

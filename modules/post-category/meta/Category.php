@@ -43,7 +43,7 @@ class Category
         
         // my rss feed?
         if(module_exists('robot'))
-            $index->_metas['feed'] = $dis->router->to('sitePostCategoryFeedXML');
+            $index->_metas['feed'] = $dis->router->to('sitePostCategoryFeed');
         
         // Schema
         $schema = [
@@ -103,7 +103,7 @@ class Category
         
         // my rss feed?
         if(module_exists('robot'))
-            $single->_metas['feed'] = $dis->router->to('sitePostCategorySingleFeedXML', ['slug'=>$category->slug]);
+            $single->_metas['feed'] = $dis->router->to('sitePostCategorySingleFeed', ['slug'=>$category->slug]);
         
         // schemas 
         $schema = [

@@ -11,18 +11,15 @@ use PostCategory\Model\PostCategory as PCategory;
 
 class RobotController extends \SiteController
 {
-    private function feed($type='xml'){
+
+    public function feedAction(){
         if(!module_exists('robot'))
             return $this->show404();
         
-        if($type === 'json' && !$this->config->robot['json'])
-            return $this->show404();
-        
-        $feed_router = $type === 'xml' ? 'sitePostCategoryFeedXML' : 'sitePostCategoryFeedJSON';
         $feed_host   = $this->setting->post_category_index_enable ? 'sitePostCategory' : 'siteHome';
         
         $feed = (object)[
-            'url'         => $this->router->to($feed_router),
+            'url'         => $this->router->to('sitePostCategoryFeed'),
             'description' => hs($this->setting->post_category_index_meta_description),
             'updated'     => null,
             'host'        => $this->router->to($feed_host),
@@ -30,15 +27,14 @@ class RobotController extends \SiteController
         ];
         
         $pages = Robot::feed();
-        $this->robot->feed($feed, $pages, $type);
+        $this->robot->feed($feed, $pages);
     }
     
-    private function feedSingle($slug, $type='xml'){
+    public function feedSingleAction(){
         if(!module_exists('robot'))
             return $this->show404();
         
-        if($type === 'json' && !$this->config->robot['json'])
-            return $this->show404();
+        $slug = $this->param->slug;
         
         $category = PCategory::get(['slug'=>$slug], false);
         if(!$category)
@@ -46,10 +42,8 @@ class RobotController extends \SiteController
         
         $category = \Formatter::format('post-category', $category, false);
         
-        $feed_router = $type === 'xml' ? 'sitePostCategorySingleFeedXML' : 'sitePostCategorySingleFeedJSON';
-        
         $feed = (object)[
-            'url'         => $this->router->to($feed_router, ['slug'=>$category->slug]),
+            'url'         => $this->router->to('sitePostCategorySingleFeed', ['slug'=>$category->slug]),
             'description' => hs($category->meta_description->value != '' ? $category->meta_description : $category->about),
             'updated'     => null,
             'host'        => $category->page,
@@ -57,22 +51,6 @@ class RobotController extends \SiteController
         ];
         
         $pages = Robot::feedPost($category);
-        $this->robot->feed($feed, $pages, $type);
-    }
-    
-    public function feedXmlAction(){
-        $this->feed('xml');
-    }
-    
-    public function feedJsonAction(){
-        $this->feed('json');
-    }
-    
-    public function feedSingleXmlAction(){
-        $this->feedSingle($this->param->slug, 'xml');
-    }
-    
-    public function feedSingleJsonAction(){
-        $this->feedSingle($this->param->slug, 'json');
+        $this->robot->feed($feed, $pages);
     }
 }
