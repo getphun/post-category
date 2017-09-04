@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS `post_category_chain` (
     `post_category` INTEGER NOT NULL,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+CREATE INDEX `by_post` ON `post_category_chain` ( `post` );
+CREATE INDEX `by_post_category` ON `post_category_chain` ( `post_category` );
 
 INSERT IGNORE INTO `site_param` ( `name`, `type`, `group`, `value` ) VALUES
     ( 'post_category_index_enable', 4, 'Post Category', '0' ),
