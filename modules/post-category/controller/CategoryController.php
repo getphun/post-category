@@ -51,9 +51,12 @@ class CategoryController extends \SiteController
         $slug = $this->param->slug;
         
         $category = PCategory::get(['slug'=>$slug], false);
-        if(!$category)
+        if(!$category){
+            if(module_exists('slug-history'))
+                $this->slug->goto('post-category', $slug, 'sitePostCategorySingle');
             return $this->show404();
-            
+        }
+        
         $page = $this->req->getQuery('page', 1);
         $rpp = 12;
         
