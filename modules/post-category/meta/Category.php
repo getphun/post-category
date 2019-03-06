@@ -71,10 +71,10 @@ class Category
             $meta_desc = $category->about->chars(160);
         $meta_image = $base_url . 'theme/site/static/logo/500x500.png';
         $meta_url   = $category->page;
-        $meta_title = $category->meta_title->safe;
+        $meta_title = $category->meta_title->value;
         $meta_keys  = $category->meta_keywords;
         if(!$meta_title)
-            $meta_title = $category->name->safe;
+            $meta_title = $category->name->value;
         
         $page = $dis->req->getQuery('page', 1);
         if($page && $page > 1){
